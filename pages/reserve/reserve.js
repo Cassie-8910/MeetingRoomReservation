@@ -2,12 +2,12 @@ var app = getApp();
 var util = require('../../utils/util.js');
 Page({
 	data: {
-		meetingRoomArr: ['请选择','403网络直播间', '404共享办公室'],
+		meetingRoomArr: ['403网络直播间', '404共享办公室'],
 		meetingRoomIndex: 0,
 		name: "", //姓名
 		academyArr: ['请选择','轻工科学与工程学院','材料科学与工程学院','环境科学与工程学院','食品与生物工程学院','机电工程学院','电气与控制工程学院','电子信息与人工智能学院','经济与管理学院','化学与化工学院','设计与艺术学院','文理学院','教育学院','马克思主义学院','阿尔斯特学院'],
 		academyIndex: 0,
-		postArr: ['请选择','教师','学生'], //岗位
+		postArr: ['教师','学生'], //岗位
 		postIndex: 0,
 		number: "", //工号/学号
 		date: "", // 选择日期

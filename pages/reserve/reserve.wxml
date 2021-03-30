@@ -51,8 +51,7 @@
                     mode="selector" 
                     range="{{postArr}}" 
                     value="{{postIndex}}"
-                    bindchange="onChangePost">{
-                        {postArr[postIndex]}}
+                    bindchange="onChangePost">{{postArr[postIndex]}}
                 </picker>
             </view>
         </view>
@@ -117,5 +116,5 @@
             </view>
         </view>
     </view>
-    <button class="reserve" bindtap="onReserve">预定</button>
+    <button class="reserve" bindtap="onReserve">申请</button>
 </view>
