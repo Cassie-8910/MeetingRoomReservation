@@ -1,0 +1,121 @@
+<!--pagr/reserve/reserve.wxml-->
+<view class="page">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">会议室</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker 
+                    class="weui-input" 
+                    mode="selector" 
+                    range="{{meetingRoomArr}}" 
+                    value="{{meetinggRoomIndex}}"
+                    bindchange="onChangeMeetingRoom">
+                    {{meetingRoomArr[meetingRoomIndex]}}
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">姓名</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="name" value="{{name}}" bindblur="getName" placeholder="请输入申请人姓名" placeholder-class="plcInput"/>
+            </view>
+        </view>
+        <view class="weui-cell  weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">学院</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker class="weui-input" mode="selector" range="{{academyArr}}" value="{{academyIndex}}"
+                    bindchange="onChangeAcademy">{{academyArr[academyIndex]}}</picker>
+            </view>
+        </view>
+        <view class="weui-cell  weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">班级</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="className" value="{{className}}" bindblur="getClassName" placeholder="请输入班级" placeholder-class="plcInput"/>
+            </view>
+        </view>
+        <view class="weui-cell  weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">岗位</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker 
+                    class="weui-input" 
+                    mode="selector" 
+                    range="{{postArr}}" 
+                    value="{{postIndex}}"
+                    bindchange="onChangePost">{
+                        {postArr[postIndex]}}
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell  weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">工号/学号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="number" value="{{number}}" bindblur="getNumber" placeholder="请输入工号或学号" placeholder-class="plcInput"/>
+            </view>
+        </view>
+        <view class="weui-cell  weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">邮箱</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="mailbox" value="{{mailbox}}" bindblur="getMailbox" placeholder="请输入邮箱" placeholder-class="plcInput"/>
+            </view>
+        </view>
+        <view class="weui-cell  weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">电话</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="phoneNum" value="{{phoneNum}}" bindblur="getPhoneNum" placeholder="请输入电话" placeholder-class="plcInput"/>
+            </view>
+        </view>
+        <view class="weui-cell  weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">申请用途</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="use" value="{{use}}" bindblur="getUse" placeholder="请输入申请用途" placeholder-class="plcInput"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">日期</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker 
+                    class="weui-input" 
+                    mode="date" 
+                    bindchange="onChangeDate" 
+                    value="{{date}}" 
+                    start="{{sdate}}"
+                    end="2100-01-01" 
+                    >
+                    {{date}}
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">时间</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker class="weui-input" mode="selector" range="{{timeArr}}" value="{{timeIndex}}"
+                    bindchange="onChangeTime">
+                    {{timeArr[timeIndex]}}
+                </picker>
+            </view>
+        </view>
+    </view>
+    <button class="reserve" bindtap="onReserve">预定</button>
+</view>

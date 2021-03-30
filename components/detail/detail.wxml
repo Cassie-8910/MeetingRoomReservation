@@ -1,0 +1,22 @@
+<!-- details.wxml -->
+<view class="page">
+	<view class="details-wrap">
+		<view class="item">
+			<view class="item-title">会议时间</view>
+			<view class="item-content">2021-03-30 18:00-20:00</view>
+		</view>
+		<view class="item">
+			<view class="item-title">会议室</view>
+			<view class="item-content" style="color: #a3a3a3">直播间</view>
+		</view>
+	</view>
+	<view class="details-wrap" style="margin-top: 50rpx;">
+		<view class="item">
+			<view class="item-title">会议说明</view>
+			<view class="item-content" style="color: #a3a3a3">申请用途</view>
+		</view>
+	</view>
+	<view class="cancel-wrap">
+		<button class="warn" class="cancel">取消会议</button>
+	</view>
+</view>

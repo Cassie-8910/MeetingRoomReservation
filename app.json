@@ -1,0 +1,41 @@
+{
+  "pages":[
+      "pages/index/index",
+      "pages/reserve/reserve",
+      "pages/mine/mine"
+  ],
+  "tabBar": {
+    "color": "#fff",
+    "selectedColor": "#333",
+    "backgroundColor": "#74b9ff",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/image/home-Fill.png",
+        "selectedIconPath": "static/image/selected-home-Fill.png"
+      },
+      {
+        "text": "预约",
+        "pagePath": "pages/reserve/reserve",
+        "iconPath": "static/image/calendar-reservation-Fill.png",
+        "selectedIconPath": "static/image/selected-calendar-reservation-Fill.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/image/user-Fill.png",
+        "selectedIconPath": "static/image/selected-user-Fill.png"
+      }
+    ],
+    "position": "bottom"
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#74b9ff",
+    "navigationBarTitleText": "会议室预约助手",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

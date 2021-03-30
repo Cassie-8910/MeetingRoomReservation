@@ -1,0 +1,3 @@
+<view class="container">
+  <calendar id="calendar" new-day="{{newDay}}"></calendar>
+</view>

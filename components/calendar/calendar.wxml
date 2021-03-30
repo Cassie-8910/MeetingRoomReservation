@@ -1,0 +1,27 @@
+<!-- 日历 -->
+<view class='calendar'>
+  <!-- 顶部年月 + 切换 -->
+  <view class="month calendar_flex">
+    <view class="icon" catchtap="minusMonth">
+      <image src="../../static/image/left.png"></image>
+    </view>
+    <view>{{year}}-{{month}}</view>
+    <view class="icon" catchtap="addMonth">
+      <image src="../../static/image/right.png"></image>
+    </view>
+  </view>
+  <!-- 周 -->
+  <view class="calendar_week">
+    <block wx:for='{{week}}' wx:key=''>
+      <view class="calendar_week_li">{{item}}</view>
+    </block>
+  </view>
+  <!-- 日 -->
+  <view class="calendar_day">
+    <block wx:for='{{days}}' wx:key=''>
+      <view
+        class='calendar_day_li  {{item.index == 0 ? "opacity": ""}} {{item.checked ? "active" : ""}} {{today == item.index ? "today" : ""}}'
+        catchtap="toDay" data-index="{{item.index}}">{{item.index}}</view>
+    </block>
+  </view>
+</view>
