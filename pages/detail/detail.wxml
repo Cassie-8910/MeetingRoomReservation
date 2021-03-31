@@ -1,15 +1,29 @@
 <!--pages/detail/detail.wxml-->
-<view class="container">
-  <view>{{ year }} - {{ month }} - {{ day }}</view>
-  <view>预约情况</view>
-  <view>
+
+<!-- 
+<view>
     <i-panel title="会议室选择">
     <i-radio-group current="{{roomCurrent}}" bindchange="handleRoomChange">
         <i-radio wx:for="{{rooms}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
         </i-radio>
     </i-radio-group>
   </i-panel>
-  </view>
+</view>
+-->
+
+<view class="section">
+  <picker mode="selector" range="{{rooms}}" range-key="name" bindchange="handleRoomChange" value="name" >
+    <view class="picker" >
+    {{roomCurrent}}  <i-icon type="unfold"  size="20" /> 
+    </view>
+  </picker>
+</view>
+
+<view class="container">
+  <view>{{ year }} - {{ month }} - {{ day }}</view>
+  <view>预约情况</view>
+</view>
+
   <view>
     <i-steps direction="vertical">
     <i-step status="process" icon="barrage">
@@ -45,6 +59,5 @@
         </view>
     </i-step>
 </i-steps>
-
   </view>
-</view>
+

@@ -9,7 +9,7 @@ Page({
     month: 0,
     day: 0,
     verticalCurrent: 2,
-    roomCurrent:"403网络直播间",
+    roomCurrent: "403网络直播间",
     rooms: [{
       id: 1,
       name: "403网络直播间"
@@ -17,14 +17,22 @@ Page({
       id: 2,
       name: "404共享办公室"
     }],
-    position: 'left'
+    position: 'left',
   },
-  handleRoomChange({detail = {}}) {
+  handleRoomChange({ detail = {} }) {
     this.setData({
-      roomCurrent: detail.value
+      roomCurrent: this.data.rooms[detail.value].name
     });
-    console.log(this.data.roomCurrent)
+    // console.log(this.data.roomCurrent)
   },
+
+  // 点击显示下拉菜单
+  // selectRoom:function (e) {
+  //   this.setData({
+
+  //   })
+  // }
+
 
   /**
    * 生命周期函数--监听页面加载

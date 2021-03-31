@@ -1,4 +1,13 @@
 Component({
+
+  // attached: function () {
+  //   // 在组件实例进入页面节点树时执行
+  //   console.log("=====" + this.data.newDay);
+  //   this.dateData()
+  //   this.checked()
+  //   this.unChecked()
+  //   this.getToday()
+  // },
   /**
    * 组件的属性列表
    */
@@ -15,6 +24,18 @@ Component({
         this.getToday()
       }
     },
+    unDay: {
+      type: Array,
+      value: '',
+      observer: function (newVal, oldVal, changedPath) {
+        // // 将日期传入页面
+        // this.dateData()
+        // // 初始化未选中样式
+        this.unChecked()
+        // // 给当日日期添加特殊样式
+        // this.getToday()
+      }
+    },
   },
 
   /**
@@ -27,6 +48,7 @@ Component({
     week: ['日', '一', '二', '三', '四', '五', '六'], //周
     days: [], //日期数据
   },
+
 
   /**
    * 组件的方法列表
@@ -92,11 +114,26 @@ Component({
       let month = this.data.month;
       let newDay = this.data.newDay
       let days = this.data.days
-      // console.log(newDay)
       for (var i = 1; i < days.length; i++) {
         let a = year + '-' + month + '-' + days[i]['index']
         days[i]['checked'] = this.inArray(newDay, a)
       }
+      this.setData({
+        days: days
+      })
+    },
+
+    // 初始化没有选中效果
+    unChecked: function () {
+      let year = this.data.year;
+      let month = this.data.month;
+      let unDay = this.data.unDay;
+      let days = this.data.days;
+      for (var i = 1; i < days.length; i++) {
+        let a = year + '-' + month + '-' + days[i]['index']
+        days[i]['unChecked'] = this.inArray(unDay, a)
+      }
+      // console.log(days);
       this.setData({
         days: days
       })
@@ -210,10 +247,10 @@ Component({
         today: today
       })
     },
-    toDay: function(item){
+    toDay: function (item) {
       var day = item.currentTarget.dataset.index;
       wx.navigateTo({
-        url: '../detail/detail?day='+day+"&year="+this.data.year+"&month="+this.data.month,
+        url: '../detail/detail?day=' + day + "&year=" + this.data.year + "&month=" + this.data.month,
       })
     }
   }

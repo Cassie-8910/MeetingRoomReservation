@@ -20,7 +20,7 @@
   <view class="calendar_day">
     <block wx:for='{{days}}' wx:key=''>
       <view
-        class='calendar_day_li  {{item.index == 0 ? "opacity": ""}} {{item.checked ? "active" : ""}} {{today == item.index ? "today" : ""}}'
+        class='calendar_day_li  {{item.index == 0 ? "opacity": ""}} {{item.checked ? "full" : ""}} {{item.unChecked ? "under" : ""}}  {{today == item.index ? "today" : ""}}'
         catchtap="toDay" data-index="{{item.index}}">{{item.index}}</view>
     </block>
   </view>
