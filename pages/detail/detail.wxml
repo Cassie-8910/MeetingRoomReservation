@@ -1,4 +1,50 @@
 <!--pages/detail/detail.wxml-->
 <view class="container">
-  <view>{{ year }}</view><view>{{ month }}</view><view>{{ day }}</view>
+  <view>{{ year }} - {{ month }} - {{ day }}</view>
+  <view>预约情况</view>
+  <view>
+    <i-panel title="会议室选择">
+    <i-radio-group current="{{roomCurrent}}" bindchange="handleRoomChange">
+        <i-radio wx:for="{{rooms}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+        </i-radio>
+    </i-radio-group>
+  </i-panel>
+  </view>
+  <view>
+    <i-steps direction="vertical">
+    <i-step status="process" icon="barrage">
+        <view slot="title">
+              9:00 - 11:00
+        </view>
+        <view slot="content">
+            已被预约
+        </view>
+    </i-step>
+    <i-step status="waite" icon="barrage">
+        <view slot="title">
+            14:00 - 16:00
+        </view>
+        <view slot="content">
+            空闲
+        </view>
+    </i-step>
+    <i-step status="process" icon="barrage">
+        <view slot="title">
+          16:00 - 18:00
+        </view>
+        <view slot="content">
+          已被预约
+        </view>
+    </i-step>
+    <i-step status="waite" icon="barrage">
+        <view slot="title">
+          18:00 - 20:00
+        </view>
+        <view slot="content">
+            空闲
+        </view>
+    </i-step>
+</i-steps>
+
+  </view>
 </view>

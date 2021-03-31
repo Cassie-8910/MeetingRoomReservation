@@ -5,18 +5,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-    year:0,
-    month:0,
-    day:0
+    year: 0,
+    month: 0,
+    day: 0,
+    verticalCurrent: 2,
+    roomCurrent:"403网络直播间",
+    rooms: [{
+      id: 1,
+      name: "403网络直播间"
+    }, {
+      id: 2,
+      name: "404共享办公室"
+    }],
+    position: 'left'
+  },
+  handleRoomChange({detail = {}}) {
+    this.setData({
+      roomCurrent: detail.value
+    });
+    console.log(this.data.roomCurrent)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.year = options.year;
-    this.data.month = options.month;
-    this.data.day = options.day;
+    this.setData({
+      year: options.year,
+      month: options.month,
+      day: options.day,
+    });
   },
 
   /**
