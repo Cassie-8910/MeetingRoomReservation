@@ -59,8 +59,8 @@ Component({
       dateDay = getDateDay(year, month)
       dateWeek = getDateWeek(year, month)
 
-      console.log(dateDay);
-      console.log(dateWeek);
+      //console.log(dateDay);
+      //console.log(dateWeek);
       //向数组中添加天
       for (let index = 1; index <= dateDay; index++) {
         let a = {
@@ -92,7 +92,7 @@ Component({
       let month = this.data.month;
       let newDay = this.data.newDay
       let days = this.data.days
-      console.log(newDay)
+      // console.log(newDay)
       for (var i = 1; i < days.length; i++) {
         let a = year + '-' + month + '-' + days[i]['index']
         days[i]['checked'] = this.inArray(newDay, a)
@@ -210,5 +210,11 @@ Component({
         today: today
       })
     },
+    toDay: function(item){
+      var day = item.currentTarget.dataset.index;
+      wx.navigateTo({
+        url: '../detail/detail?day='+day+"&year="+this.data.year+"&month="+this.data.month,
+      })
+    }
   }
 })

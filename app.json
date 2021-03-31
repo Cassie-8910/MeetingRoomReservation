@@ -1,8 +1,9 @@
 {
-  "pages":[
-      "pages/index/index",
-      "pages/reserve/reserve",
-      "pages/mine/mine"
+  "pages": [
+    "pages/index/index",
+    "pages/reserve/reserve",
+    "pages/mine/mine",
+    "pages/detail/detail"
   ],
   "tabBar": {
     "color": "#fff",
@@ -30,11 +31,11 @@
     ],
     "position": "bottom"
   },
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#74b9ff",
     "navigationBarTitleText": "会议室预约助手",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

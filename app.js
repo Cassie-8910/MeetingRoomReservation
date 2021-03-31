@@ -10,10 +10,26 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if(res.code){
+          console.log(res.code);
+          wx.request({
+            url: this.globalData.hostPre+'api/v1/user/login',
+            method: "post",
+            data: {
+              code: res.code
+            },
+            success: res => {
+
+            }
+          })
+        }else {
+          console.log('登录失败！' + res.errMsg)
+        }
       }
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    hostPre: "http://10.111.62.80:8000/"
   }
 })
