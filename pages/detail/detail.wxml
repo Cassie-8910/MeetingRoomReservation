@@ -1,20 +1,10 @@
 <!--pages/detail/detail.wxml-->
 
-<!-- 
-<view>
-    <i-panel title="会议室选择">
-    <i-radio-group current="{{roomCurrent}}" bindchange="handleRoomChange">
-        <i-radio wx:for="{{rooms}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
-        </i-radio>
-    </i-radio-group>
-  </i-panel>
-</view>
--->
-
 <view class="section">
-  <picker mode="selector" range="{{rooms}}" range-key="name" bindchange="handleRoomChange" value="name" >
-    <view class="picker" >
-    {{roomCurrent}}  <i-icon type="unfold"  size="20" /> 
+  <picker mode="selector" range="{{rooms}}" range-key="name" bindchange="handleRoomChange" value="name">
+    <view class="picker">
+      {{roomCurrent}}
+      <i-icon type="unfold" size="20" />
     </view>
   </picker>
 </view>
@@ -24,40 +14,46 @@
   <view>预约情况</view>
 </view>
 
-  <view>
-    <i-steps direction="vertical">
+<view>
+  <i-steps direction="vertical">
     <i-step status="process" icon="barrage">
-        <view slot="title">
-              9:00 - 11:00
-        </view>
-        <view slot="content">
-            已被预约
-        </view>
+      <view slot="title">
+        9:00 - 11:00
+        <i-button bind:click="handleClick" inline="false" i-class="btn" shape="circle">
+          点击预约</i-button>
+      </view>
+      <view slot="content">
+        已被预约
+      </view>
     </i-step>
     <i-step status="waite" icon="barrage">
-        <view slot="title">
-            14:00 - 16:00
-        </view>
-        <view slot="content">
-            空闲
-        </view>
+      <view slot="title">
+        14:00 - 16:00
+        <i-button bind:click="handleClick" inline="false" i-class="btn" shape="circle">
+          点击预约</i-button>
+      </view>
+      <view slot="content">
+        空闲
+      </view>
     </i-step>
     <i-step status="process" icon="barrage">
-        <view slot="title">
-          16:00 - 18:00
-        </view>
-        <view slot="content">
-          已被预约
-        </view>
+      <view slot="title">
+        16:00 - 18:00
+        <i-button bind:click="handleClick" inline="false" shape="circle">点击预约
+        </i-button>
+      </view>
+      <view slot="content">
+        已被预约
+      </view>
     </i-step>
     <i-step status="waite" icon="barrage">
-        <view slot="title">
-          18:00 - 20:00
-        </view>
-        <view slot="content">
-            空闲
-        </view>
+      <view slot="title">
+        18:00 - 20:00
+        <i-button bind:click="handleClick" inline="false" i-class="btn" shape="circle">点击预约</i-button>
+      </view>
+      <view slot="content">
+        空闲
+      </view>
     </i-step>
-</i-steps>
-  </view>
-
+  </i-steps>
+</view>

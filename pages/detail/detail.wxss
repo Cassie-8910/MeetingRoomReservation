@@ -2,10 +2,11 @@
 .section__title,.picker{
     height: 40px;
     padding-left: 10px;
-    background-color:#7ea0e2;
+    text-align: center;
     line-height: 40px;
-    font-size: 20px;
 }
 .picker{
+    position: relative;
     display: block;
+    top: 20rpx;
 }

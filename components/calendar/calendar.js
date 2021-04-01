@@ -1,13 +1,12 @@
 Component({
-
-  // attached: function () {
-  //   // 在组件实例进入页面节点树时执行
-  //   console.log("=====" + this.data.newDay);
-  //   this.dateData()
-  //   this.checked()
-  //   this.unChecked()
-  //   this.getToday()
-  // },
+  attached: function () {
+    // 在组件实例进入页面节点树时执行
+    console.log("=====" + this.data.newDay);
+    this.dateData()
+    this.checked()
+    this.unChecked()
+    this.getToday()
+  },
   /**
    * 组件的属性列表
    */
@@ -164,6 +163,7 @@ Component({
 
       this.updateDays(year, month)
       this.checked()
+      this.unChecked()
       this.getToday()
     },
     //点击增加月份
@@ -182,52 +182,9 @@ Component({
 
       this.updateDays(year, month)
       this.checked()
+      this.unChecked()
       this.getToday()
     },
-
-    //点击选中事件
-    // toDay: function (e) {
-    //   let year = this.data.year;
-    //   let month = this.data.month;
-    //   let item = e.currentTarget.dataset.index
-    //   let newDay = this.data.newDay
-    //   let days = this.data.days
-
-    //   // 判断当数组中添加的‘0’超过1个时，将item增加几个字符
-    //   let num_ = 0
-    //   for (var i = 1; i < days.length; i++) {
-    //     if (days[i].index == 0) {
-    //       num_++
-    //     }
-    //   }
-    //   // 当1号为第一天时，数组中不存在‘0’时，需要将item减一，否则点击效果会往后移动一位
-    //   if (days[0].index == 1) {
-    //     num_--
-    //   }
-    //   // console.log(num_)
-    //   // 重新定义item
-    //   item += num_
-
-    //   days[item].checked = !days[item].checked
-
-    //   // if (days[item].checked) {
-    //   //   newDay.push(year + '-' + month + '-' + days[item].index)
-    //   // } else {
-    //   //   for (var i = 0; i < newDay.length; i++) {
-    //   //     if (newDay[i] == year + '-' + month + '-' + days[item].index) {
-    //   //       newDay.splice(i, 1)
-    //   //     }
-    //   //   }
-    //   // }
-
-    //   console.log("newDay:",newDay)
-    //   // console.log(item)
-
-    //   this.setData({
-    //     newDay: newDay,
-    //     days: days
-    //   })
-    // },
 
     // 获取今日日期，使当天日期有单独样式
     getToday: function () {
@@ -253,5 +210,30 @@ Component({
         url: '../detail/detail?day=' + day + "&year=" + this.data.year + "&month=" + this.data.month,
       })
     }
+  },
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    year: 0,
+    month: 0,
+    day: 0,
+    verticalCurrent: 2,
+    roomCurrent: "403网络直播间",
+    rooms: [{
+      id: 1,
+      name: "403网络直播间"
+    }, {
+      id: 2,
+      name: "404共享办公室"
+    }],
+    position: 'left',
+  },
+
+  handleRoomChange({ detail = {} }) {
+    this.setData({
+      roomCurrent: this.data.rooms[detail.value].name
+    });
   }
+
 })

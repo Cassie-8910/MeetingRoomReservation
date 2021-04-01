@@ -19,20 +19,19 @@ Page({
     }],
     position: 'left',
   },
+  // 
   handleRoomChange({ detail = {} }) {
     this.setData({
       roomCurrent: this.data.rooms[detail.value].name
     });
-    // console.log(this.data.roomCurrent)
   },
 
-  // 点击显示下拉菜单
-  // selectRoom:function (e) {
-  //   this.setData({
-
-  //   })
-  // }
-
+  // 按钮点击事件
+  handleClick: function () {
+    wx.navigateTo({
+      url: '../reserve/reserve'
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
