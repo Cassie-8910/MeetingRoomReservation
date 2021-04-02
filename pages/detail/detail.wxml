@@ -16,44 +16,56 @@
 </view>
 
 <!-- 预约时间选择 -->
-<view>
+<view class="reserveTime">
   <i-steps direction="vertical">
-    <i-step status="process" icon="barrage">
+    <i-step i-class="timeline" status="process" icon="barrage">
       <view slot="title">
         9:00 - 11:00
-        <i-button bind:click="handleClick" inline="false" i-class="btn" shape="circle">
-          点击预约</i-button>
       </view>
-      <view slot="content">
+      <view slot="content" class="reserveBtn">
+        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_1}}">点击预约
+        </i-button>
+      </view>
+      <view slot="content" class="status">
         已被预约
       </view>
     </i-step>
-    <i-step status="waite" icon="barrage">
+
+    <i-step i-class="timeline" status="waite" icon="barrage">
       <view slot="title">
         14:00 - 16:00
-        <i-button bind:click="handleClick" inline="false" i-class="btn" shape="circle">
-          点击预约</i-button>
       </view>
-      <view slot="content">
+      <view slot="content" class="reserveBtn">
+        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_2}}">点击预约
+        </i-button>
+      </view>
+      <view slot="content" class="status">
         空闲
       </view>
     </i-step>
-    <i-step status="process" icon="barrage">
+
+    <i-step i-class="timeline" status="process" icon="barrage">
       <view slot="title">
         16:00 - 18:00
-        <i-button bind:click="handleClick" inline="false" shape="circle">点击预约
+      </view>
+      <view slot="content" class="reserveBtn">
+        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_3}}">点击预约
         </i-button>
       </view>
-      <view slot="content">
+      <view slot="content" class="status">
         已被预约
       </view>
     </i-step>
-    <i-step status="waite" icon="barrage">
+
+    <i-step i-class="timeline" status="waite" icon="barrage">
       <view slot="title">
         18:00 - 20:00
-        <i-button bind:click="handleClick" inline="false" i-class="btn" shape="circle">点击预约</i-button>
       </view>
-      <view slot="content">
+      <view slot="content" class="reserveBtn">
+        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_4}}">点击预约
+        </i-button>
+      </view>
+      <view slot="content" class="status">
         空闲
       </view>
     </i-step>

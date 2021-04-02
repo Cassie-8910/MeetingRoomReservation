@@ -19,7 +19,7 @@
   margin-top: 100rpx;
 }
 .calendar .yearMonth{
-  font-size: 50rpx;
+  font-size: 40rpx;
 }
 
 .calendar image {

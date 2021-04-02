@@ -1,6 +1,5 @@
 // pages/detail/detail.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -18,7 +17,13 @@ Page({
       name: "404共享办公室"
     }],
     position: 'left',
+    reservedArr: [1, 2, 3],
+    button_1: false,
+    button_2: false,
+    button_3: false,
+    button_4: false,
   },
+
   // 切换会议室
   handleRoomChange({ detail = {} }) {
     this.setData({
@@ -48,7 +53,31 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(this.data.year);
+    let { reservedArr, button_1, button_2, button_3, button_4 } = this.data;
+    reservedArr.forEach(element => {
+      switch (element) {
+        case 1:
+          button_1 = !button_1;
+          break;
+        case 2:
+          button_2 = !button_2;
+          break;
+        case 3:
+          button_3 = !button_3;
+          break;
+        case 4:
+          button_4 = !button_4;
+          break;
+        default:
+          break;
+      }
+    })
+    this.setData({
+      button_1: button_1,
+      button_2: button_2,
+      button_3: button_3,
+      button_4: button_4,
+    })
   },
 
   /**
