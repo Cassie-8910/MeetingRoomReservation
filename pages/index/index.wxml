@@ -1,3 +1,3 @@
 <view class="container">
-  <calendar id="calendar" new-day="{{newDay}}"></calendar>
+  <calendar id="calendar" new-day="{{newDay}}" un-day="{{unDay}}"></calendar>
 </view>

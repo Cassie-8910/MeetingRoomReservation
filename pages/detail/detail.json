@@ -3,6 +3,8 @@
     "i-steps": "/components/dist/steps/index",
     "i-step": "/components/dist/step/index",
     "i-radio-group": "/components/dist/radio-group/index",
-    "i-radio": "/components/dist/radio/index"
+    "i-radio": "/components/dist/radio/index",
+    "i-icon": "/components/dist/icon/index",
+    "i-button": "/components/dist/button/index"
   }
 }

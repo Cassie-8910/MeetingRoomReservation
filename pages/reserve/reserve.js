@@ -5,14 +5,12 @@ Page({
 		meetingRoomArr: ['403网络直播间', '404共享办公室'],
 		meetingRoomIndex: 0,
 		name: "", //姓名
-		academyArr: ['请选择','轻工科学与工程学院','材料科学与工程学院','环境科学与工程学院','食品与生物工程学院','机电工程学院','电气与控制工程学院','电子信息与人工智能学院','经济与管理学院','化学与化工学院','设计与艺术学院','文理学院','教育学院','马克思主义学院','阿尔斯特学院'],
+		academyArr: ['轻工科学与工程学院', '材料科学与工程学院', '环境科学与工程学院', '食品与生物工程学院', '机电工程学院', '电气与控制工程学院', '电子信息与人工智能学院', '经济与管理学院', '化学与化工学院', '设计与艺术学院', '文理学院', '教育学院', '马克思主义学院', '阿尔斯特学院'],
 		academyIndex: 0,
-		postArr: ['教师','学生'], //岗位
+		postArr: ['教师', '学生'], //岗位
 		postIndex: 0,
 		number: "", //工号/学号
 		date: "", // 选择日期
-		timeArr: ['请选择','9:00-11:00','14:00-16:00','16:00-18:00','18:00-20:00'],
-		timeIndex: 0,
 		className: "",
 		phoneNum: "", //电话
 		mailbox: "", //邮箱
@@ -40,7 +38,7 @@ Page({
 			title: '正在预定中...',
 		});
 	},
-	onChangeMeetingRoom(e){
+	onChangeMeetingRoom(e) {
 		this.setData({
 			meetingRoomIndex: e.detail.value
 		})
@@ -65,13 +63,13 @@ Page({
 			timeIndex: e.detail.value
 		});
 	},
-	
+
 	getName(e) {
 		this.setData({
 			name: e.detail.value
 		});
 	},
-	getClassName(e){
+	getClassName(e) {
 		this.setData({
 			className: e.detail.value
 		})
