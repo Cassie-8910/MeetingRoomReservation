@@ -8,7 +8,7 @@
 .picker{
   position: relative;
   display: block;
-  top: 20rpx;
+  top: 40rpx;
 }
 
 /* 日历 */
@@ -16,12 +16,11 @@
   width: 100vw;
   padding: 10rpx 0;
   box-sizing: border-box;
-  margin-top: 20rpx;
+  margin-top: 100rpx;
 }
 .calendar .yearMonth{
-  font-size: 40rpx;
+  font-size: 50rpx;
 }
-
 
 .calendar image {
   width: 40rpx;
@@ -81,7 +80,7 @@
   margin-right: 11rpx;
   display: inline-block;
   box-sizing: border-box;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   position: relative;
 }
 
@@ -132,7 +131,7 @@
   bottom: 50px;
 }
 .alert{
-  background-color:#8bc5f5;
+  background-color:#69bafc;
   border-radius: 40rpx;
 }
 .redFont{

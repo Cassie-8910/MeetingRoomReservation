@@ -8,5 +8,5 @@
 .picker{
     position: relative;
     display: block;
-    top: 20rpx;
+    top: 40rpx;
 }

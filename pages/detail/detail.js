@@ -19,7 +19,7 @@ Page({
     }],
     position: 'left',
   },
-  // 
+  // 切换会议室
   handleRoomChange({ detail = {} }) {
     this.setData({
       roomCurrent: this.data.rooms[detail.value].name

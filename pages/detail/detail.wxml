@@ -1,5 +1,5 @@
 <!--pages/detail/detail.wxml-->
-
+<!-- 会议室选择区 -->
 <view class="section">
   <picker mode="selector" range="{{rooms}}" range-key="name" bindchange="handleRoomChange" value="name">
     <view class="picker">
@@ -9,11 +9,13 @@
   </picker>
 </view>
 
+<!-- 预约情况区 -->
 <view class="container">
   <view>{{ year }} - {{ month }} - {{ day }}</view>
   <view>预约情况</view>
 </view>
 
+<!-- 预约时间选择 -->
 <view>
   <i-steps direction="vertical">
     <i-step status="process" icon="barrage">

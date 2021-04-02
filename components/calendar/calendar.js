@@ -46,9 +46,17 @@ Component({
     today: '', //日
     week: ['日', '一', '二', '三', '四', '五', '六'], //周
     days: [], //日期数据
+    verticalCurrent: 2,
+    roomCurrent: "403网络直播间",
+    rooms: [{
+      id: 1,
+      name: "403网络直播间"
+    }, {
+      id: 2,
+      name: "404共享办公室"
+    }],
+    position: 'left',
   },
-
-
   /**
    * 组件的方法列表
    */
@@ -209,31 +217,12 @@ Component({
       wx.navigateTo({
         url: '../detail/detail?day=' + day + "&year=" + this.data.year + "&month=" + this.data.month,
       })
+    },
+    // 切换会议室
+    handleRoomChange({ detail = {} }) {
+      this.setData({
+        roomCurrent: this.data.rooms[detail.value].name
+      });
     }
   },
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    year: 0,
-    month: 0,
-    day: 0,
-    verticalCurrent: 2,
-    roomCurrent: "403网络直播间",
-    rooms: [{
-      id: 1,
-      name: "403网络直播间"
-    }, {
-      id: 2,
-      name: "404共享办公室"
-    }],
-    position: 'left',
-  },
-
-  handleRoomChange({ detail = {} }) {
-    this.setData({
-      roomCurrent: this.data.rooms[detail.value].name
-    });
-  }
-
 })
