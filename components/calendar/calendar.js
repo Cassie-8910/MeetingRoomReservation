@@ -1,4 +1,12 @@
 Component({
+  attached: function () {
+    // 在组件实例进入页面节点树时执行
+    console.log("=====" + this.data.newDay);
+    this.dateData()
+    this.checked()
+    this.unChecked()
+    this.getToday()
+  },
   /**
    * 组件的属性列表
    */
@@ -15,6 +23,18 @@ Component({
         this.getToday()
       }
     },
+    unDay: {
+      type: Array,
+      value: '',
+      observer: function (newVal, oldVal, changedPath) {
+        // // 将日期传入页面
+        // this.dateData()
+        // // 初始化未选中样式
+        this.unChecked()
+        // // 给当日日期添加特殊样式
+        // this.getToday()
+      }
+    },
   },
 
   /**
@@ -26,8 +46,17 @@ Component({
     today: '', //日
     week: ['日', '一', '二', '三', '四', '五', '六'], //周
     days: [], //日期数据
+    verticalCurrent: 2,
+    roomCurrent: "403网络直播间",
+    rooms: [{
+      id: 1,
+      name: "403网络直播间"
+    }, {
+      id: 2,
+      name: "404共享办公室"
+    }],
+    position: 'left',
   },
-
   /**
    * 组件的方法列表
    */
@@ -59,8 +88,8 @@ Component({
       dateDay = getDateDay(year, month)
       dateWeek = getDateWeek(year, month)
 
-      console.log(dateDay);
-      console.log(dateWeek);
+      //console.log(dateDay);
+      //console.log(dateWeek);
       //向数组中添加天
       for (let index = 1; index <= dateDay; index++) {
         let a = {
@@ -92,11 +121,26 @@ Component({
       let month = this.data.month;
       let newDay = this.data.newDay
       let days = this.data.days
-      console.log(newDay)
       for (var i = 1; i < days.length; i++) {
         let a = year + '-' + month + '-' + days[i]['index']
         days[i]['checked'] = this.inArray(newDay, a)
       }
+      this.setData({
+        days: days
+      })
+    },
+
+    // 初始化没有选中效果
+    unChecked: function () {
+      let year = this.data.year;
+      let month = this.data.month;
+      let unDay = this.data.unDay;
+      let days = this.data.days;
+      for (var i = 1; i < days.length; i++) {
+        let a = year + '-' + month + '-' + days[i]['index']
+        days[i]['unChecked'] = this.inArray(unDay, a)
+      }
+      // console.log(days);
       this.setData({
         days: days
       })
@@ -127,6 +171,7 @@ Component({
 
       this.updateDays(year, month)
       this.checked()
+      this.unChecked()
       this.getToday()
     },
     //点击增加月份
@@ -145,52 +190,9 @@ Component({
 
       this.updateDays(year, month)
       this.checked()
+      this.unChecked()
       this.getToday()
     },
-
-    //点击选中事件
-    // toDay: function (e) {
-    //   let year = this.data.year;
-    //   let month = this.data.month;
-    //   let item = e.currentTarget.dataset.index
-    //   let newDay = this.data.newDay
-    //   let days = this.data.days
-
-    //   // 判断当数组中添加的‘0’超过1个时，将item增加几个字符
-    //   let num_ = 0
-    //   for (var i = 1; i < days.length; i++) {
-    //     if (days[i].index == 0) {
-    //       num_++
-    //     }
-    //   }
-    //   // 当1号为第一天时，数组中不存在‘0’时，需要将item减一，否则点击效果会往后移动一位
-    //   if (days[0].index == 1) {
-    //     num_--
-    //   }
-    //   // console.log(num_)
-    //   // 重新定义item
-    //   item += num_
-
-    //   days[item].checked = !days[item].checked
-
-    //   // if (days[item].checked) {
-    //   //   newDay.push(year + '-' + month + '-' + days[item].index)
-    //   // } else {
-    //   //   for (var i = 0; i < newDay.length; i++) {
-    //   //     if (newDay[i] == year + '-' + month + '-' + days[item].index) {
-    //   //       newDay.splice(i, 1)
-    //   //     }
-    //   //   }
-    //   // }
-
-    //   console.log("newDay:",newDay)
-    //   // console.log(item)
-
-    //   this.setData({
-    //     newDay: newDay,
-    //     days: days
-    //   })
-    // },
 
     // 获取今日日期，使当天日期有单独样式
     getToday: function () {
@@ -210,5 +212,17 @@ Component({
         today: today
       })
     },
-  }
+    toDay: function (item) {
+      var day = item.currentTarget.dataset.index;
+      wx.navigateTo({
+        url: '../detail/detail?day=' + day + "&year=" + this.data.year + "&month=" + this.data.month,
+      })
+    },
+    // 切换会议室
+    handleRoomChange({ detail = {} }) {
+      this.setData({
+        roomCurrent: this.data.rooms[detail.value].name
+      });
+    }
+  },
 })

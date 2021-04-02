@@ -1,27 +1,48 @@
-<!-- 日历 -->
-<view class='calendar'>
-  <!-- 顶部年月 + 切换 -->
-  <view class="month calendar_flex">
-    <view class="icon" catchtap="minusMonth">
-      <image src="../../static/image/left.png"></image>
+<view class="body">
+  <!-- 顶部会议室选择 -->
+  <view class="section">
+    <picker mode="selector" range="{{rooms}}" range-key="name" bindchange="handleRoomChange" value="name">
+      <view class="picker">
+        {{roomCurrent}}
+        <i-icon type="unfold" size="20" />
+      </view>
+    </picker>
+  </view>
+
+  <!-- 日历 -->
+  <view class='calendar'>
+    <!-- 顶部年月 + 切换 -->
+    <view class="month calendar_flex">
+      <view class="icon" catchtap="minusMonth">
+        <image src="../../static/image/left.png"></image>
+      </view>
+      <view>
+        <span class="yearMonth">{{year}}-{{month}}</span>
+      </view>
+      <view class="icon" catchtap="addMonth">
+        <image src="../../static/image/right.png"></image>
+      </view>
     </view>
-    <view>{{year}}-{{month}}</view>
-    <view class="icon" catchtap="addMonth">
-      <image src="../../static/image/right.png"></image>
+    <!-- 周 -->
+    <view class="calendar_week">
+      <block wx:for='{{week}}' wx:key=''>
+        <view class="calendar_week_li">{{item}}</view>
+      </block>
+    </view>
+    <!-- 日 -->
+    <view class="calendar_day">
+      <block wx:for='{{days}}' wx:key=''>
+        <view
+          class='calendar_day_li  {{item.index == 0 ? "opacity": ""}} {{item.checked ? "full" : ""}} {{item.unChecked ? "under" : ""}}  {{today == item.index ? "today" : ""}}'
+          catchtap="toDay" data-index="{{item.index}}">{{item.index}}</view>
+      </block>
     </view>
   </view>
-  <!-- 周 -->
-  <view class="calendar_week">
-    <block wx:for='{{week}}' wx:key=''>
-      <view class="calendar_week_li">{{item}}</view>
-    </block>
-  </view>
-  <!-- 日 -->
-  <view class="calendar_day">
-    <block wx:for='{{days}}' wx:key=''>
-      <view
-        class='calendar_day_li  {{item.index == 0 ? "opacity": ""}} {{item.checked ? "active" : ""}} {{today == item.index ? "today" : ""}}'
-        catchtap="toDay" data-index="{{item.index}}">{{item.index}}</view>
-    </block>
+
+  <!-- 底部提示栏 -->
+  <view class="bottomBar">
+    <i-alert closable bind:close="handleClick" i-class="alert">
+      注: <span class="redFont">红色</span>代表已预约满,<span class="yellowFont">黄色</span>代表未预约满
+    </i-alert>
   </view>
 </view>

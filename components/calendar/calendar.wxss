@@ -1,8 +1,25 @@
+/* 头部选择区 */
+.section__title,.picker{
+  height: 40px;
+  padding-left: 10px;
+  text-align: center;
+  line-height: 40px;
+}
+.picker{
+  position: relative;
+  display: block;
+  top: 40rpx;
+}
+
 /* 日历 */
 .calendar {
   width: 100vw;
   padding: 10rpx 0;
   box-sizing: border-box;
+  margin-top: 100rpx;
+}
+.calendar .yearMonth{
+  font-size: 40rpx;
 }
 
 .calendar image {
@@ -55,15 +72,15 @@
 
 .calendar_day_li {
   width: calc((100vw - 60rpx - 66rpx) / 7);
-  height: 60rpx;
+  height: calc((100vw - 60rpx - 66rpx) / 7);
   text-align: center;
-  line-height: 60rpx;
+  line-height:calc((100vw - 60rpx - 66rpx) / 7) ;
   border: 2rpx solid #eee;
   margin-bottom: 11rpx;
   margin-right: 11rpx;
   display: inline-block;
   box-sizing: border-box;
-  border-radius: 4rpx;
+  border-radius: 20rpx;
   position: relative;
 }
 
@@ -84,8 +101,13 @@
   color: #7ea0e2;
 }
 
-.calendar_day_li.active {
-  background: #7ea0e2;
+.calendar_day_li.full {
+  background: red;
+  color: #fff;
+  border: 2rpx solid #7ea0e2;
+}
+.calendar_day_li.under {
+  background: orange;
   color: #fff;
   border: 2rpx solid #7ea0e2;
 }
@@ -102,4 +124,19 @@
 
 .calendar_flex {
   display: flex;
+}
+.bottomBar{
+  position: absolute;
+  left:45rpx;
+  bottom: 50px;
+}
+.alert{
+  background-color:#69bafc;
+  border-radius: 40rpx;
+}
+.redFont{
+  color:red;
+}
+.yellowFont{
+  color: orange;
 }

@@ -1,0 +1,28 @@
+/* pages/detail/detail.wxss */
+/* 会议室选择区 */
+.section__title,.picker{
+    height: 40px;
+    padding-left: 10px;
+    text-align: center;
+    line-height: 40px;
+}
+.picker{
+    position: relative;
+    display: block;
+    top: 40rpx;
+}
+/* 日期显示区 */
+.container{
+    padding: 100rpx 0;
+}
+.reserveTime{
+    margin-top: 50rpx;
+}
+.reserveBtn {
+    position: absolute;
+    right: 10rpx;
+    top: -20rpx;
+}
+.status {
+    font-size: 30rpx !important;
+}

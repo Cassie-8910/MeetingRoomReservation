@@ -1,0 +1,73 @@
+<!--pages/detail/detail.wxml-->
+<!-- 会议室选择区 -->
+<view class="section">
+  <picker mode="selector" range="{{rooms}}" range-key="name" bindchange="handleRoomChange" value="name">
+    <view class="picker">
+      {{roomCurrent}}
+      <i-icon type="unfold" size="20" />
+    </view>
+  </picker>
+</view>
+
+<!-- 预约情况区 -->
+<view class="container">
+  <view>{{ year }} - {{ month }} - {{ day }}</view>
+  <view>预约情况</view>
+</view>
+
+<!-- 预约时间选择 -->
+<view class="reserveTime">
+  <i-steps direction="vertical">
+    <i-step i-class="timeline" status="process" icon="barrage">
+      <view slot="title">
+        9:00 - 11:00
+      </view>
+      <view slot="content" class="reserveBtn">
+        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_1}}">点击预约
+        </i-button>
+      </view>
+      <view slot="content" class="status">
+        已被预约
+      </view>
+    </i-step>
+
+    <i-step i-class="timeline" status="waite" icon="barrage">
+      <view slot="title">
+        14:00 - 16:00
+      </view>
+      <view slot="content" class="reserveBtn">
+        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_2}}">点击预约
+        </i-button>
+      </view>
+      <view slot="content" class="status">
+        空闲
+      </view>
+    </i-step>
+
+    <i-step i-class="timeline" status="process" icon="barrage">
+      <view slot="title">
+        16:00 - 18:00
+      </view>
+      <view slot="content" class="reserveBtn">
+        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_3}}">点击预约
+        </i-button>
+      </view>
+      <view slot="content" class="status">
+        已被预约
+      </view>
+    </i-step>
+
+    <i-step i-class="timeline" status="waite" icon="barrage">
+      <view slot="title">
+        18:00 - 20:00
+      </view>
+      <view slot="content" class="reserveBtn">
+        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_4}}">点击预约
+        </i-button>
+      </view>
+      <view slot="content" class="status">
+        空闲
+      </view>
+    </i-step>
+  </i-steps>
+</view>
