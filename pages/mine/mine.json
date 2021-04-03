@@ -1,4 +1,10 @@
 {
-  "navigationBarTitleText": "我的",
-  "usingComponents": {}
+  "navigationBarTitleText": "历史记录",
+  "usingComponents": {
+    "i-swipeout": "../../components/dist/swipeout/index",
+    "i-steps": "../../components/dist/steps/index",
+    "i-step": "../../components/dist/step/index",
+    "i-row": "../../components/dist/row/index",
+    "i-col": "../../components/dist/col/index"
+  }
 }
