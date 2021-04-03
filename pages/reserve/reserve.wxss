@@ -1,18 +1,14 @@
-/* pagr/reserve/reserve.wxss */
+/* page/reserve/reserve.wxss */
 .reserve {
-	color: #fff;
-	background: #74b9ff;
-	height: 80rpx;
-	line-height: 80rpx;
-	width: 92%;
+	background-color: #74b9ff !important; 
 	margin-top: 55rpx;
 }
 
 .weui-label, .weui-input, .plcInput {
 	font-size: 38rpx;
-	font-family: Georgia, "Times New Roman", Times, serif;
+	/* font-family: Georgia, "Times New Roman", Times, serif; */
 }
 
-.weui-input,.plcInput {
+.weui-inputs {
 	color: #4b4b4b;
 }

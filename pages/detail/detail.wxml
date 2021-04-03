@@ -15,58 +15,60 @@
   <view>预约情况</view>
 </view>
 
+<i-toast id="toast" />
+
 <!-- 预约时间选择 -->
 <view class="reserveTime">
   <i-steps direction="vertical">
-    <i-step i-class="timeline" status="process" icon="barrage">
-      <view slot="title">
+    <i-step i-class="timeline" status="{{reserveStatus[0]}}" icon="barrage">
+      <view slot="title" style="font-size: 32rpx">
         9:00 - 11:00
       </view>
       <view slot="content" class="reserveBtn">
-        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_1}}">点击预约
+        <i-button id="1" bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{reservedArr[0]}}">点击预约
         </i-button>
       </view>
       <view slot="content" class="status">
-        已被预约
+        {{isReserved[0]}}
       </view>
     </i-step>
 
-    <i-step i-class="timeline" status="waite" icon="barrage">
-      <view slot="title">
+    <i-step i-class="timeline" status="{{reserveStatus[1]}}" icon="barrage">
+      <view slot="title" style="font-size: 32rpx">
         14:00 - 16:00
       </view>
       <view slot="content" class="reserveBtn">
-        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_2}}">点击预约
+        <i-button id="2" bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{reservedArr[1]}}">点击预约
         </i-button>
       </view>
       <view slot="content" class="status">
-        空闲
+        {{isReserved[1]}}
       </view>
     </i-step>
 
-    <i-step i-class="timeline" status="process" icon="barrage">
-      <view slot="title">
+    <i-step i-class="timeline" status="{{reserveStatus[2]}}" icon="barrage">
+      <view slot="title" style="font-size: 32rpx">
         16:00 - 18:00
       </view>
       <view slot="content" class="reserveBtn">
-        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_3}}">点击预约
+        <i-button id="3" bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{reservedArr[2]}}">点击预约
         </i-button>
       </view>
       <view slot="content" class="status">
-        已被预约
+        {{isReserved[2]}}
       </view>
     </i-step>
 
-    <i-step i-class="timeline" status="waite" icon="barrage">
-      <view slot="title">
+    <i-step i-class="timeline" status="{{reserveStatus[3]}}" icon="barrage">
+      <view slot="title" style="font-size: 32rpx">
         18:00 - 20:00
       </view>
       <view slot="content" class="reserveBtn">
-        <i-button bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{button_4}}">点击预约
+        <i-button id ="4" bind:click="handleClick" size="samll" inline="false" shape="circle" disabled="{{reservedArr[3]}}">点击预约
         </i-button>
       </view>
       <view slot="content" class="status">
-        空闲
+        {{isReserved[3]}}
       </view>
     </i-step>
   </i-steps>

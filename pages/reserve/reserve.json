@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "预约",
-  "usingComponents": {}
+  "usingComponents": {
+    "i-toast": "/components/dist/toast/index",
+    "i-button": "/components/dist/button/index"
+  }
 }

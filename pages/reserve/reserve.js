@@ -1,5 +1,6 @@
 var app = getApp();
 var util = require('../../utils/util.js');
+const { $Toast } = require('../../components/dist/base/index');
 Page({
 	data: {
 		meetingRoomArr: ['403网络直播间', '404共享办公室'],
@@ -15,28 +16,103 @@ Page({
 		phoneNum: "", //电话
 		mailbox: "", //邮箱
 		use: "", // 申请用途
+		time: "" //申请时间
 	},
 	onLoad: function (options) {
 		this.setData({
-			date: util.getDate()
+			date: util.getDate(),
+			time: options.startTime + '-' + options.endTime,
+			meetingRoomIndex: options.roomCurrentId - 1,
+			date: options.year + '-' + options.month + '-' + options.day
 		})
 	},
 
 	//预定按钮事件
 	onReserve() {
-		var rooms = this.data.rboardroom.map(item => item.roomId);
-		var params = {
-			name: this.data.name,
-			academy: this.data.academy,
-			date: this.data.date,
-			startTime: this.data.stime,
-			endTime: this.data.etime,
-			description: this.data.describe,
-			rooms: rooms
-		};
-		wx.showLoading({
-			title: '正在预定中...',
-		});
+		if (this.data.name && this.data.className && this.data.number && this.data.mailbox && this.data.phoneNum && this.data.use) {
+			console.log(this.data.meetingRoomArr[this.data.meetingRoomIndex])
+
+			function getCurrentRoomId(currentRoom) {
+				switch (currentRoom) {
+					case '403网络直播间':
+						return 1;
+					case '404共享办公室':
+						return 2;
+				}
+			}
+			let roomId = getCurrentRoomId(this.data.meetingRoomArr[this.data.meetingRoomIndex])
+			let startTime = this.data.date + ' ' + this.data.time.split('-')[0] + ":00"
+			let endTime = this.data.date + ' ' + this.data.time.split('-')[1] + ":00"
+			let startStamp = new Date(startTime).getTime()
+			let endStamp = new Date(endTime).getTime()
+			console.log('startStamp:' + startStamp + 'endStamp:' + endStamp)
+
+			let data = {
+				"userId": 1,
+				"roomId": roomId,
+				"applicant": this.data.name,
+				"college": this.data.academyArr[this.data.academyIndex],
+				"classes": this.data.className,
+				"identity": this.data.postArr[this.data.postIndex],
+				"jobNumber": this.data.number,
+				"email": this.data.mailbox,
+				"phoneNumber": this.data.phoneNum,
+				"reasonsForApplication": this.data.use,
+				"startStamp": startStamp,
+				"endStamp": endStamp
+			}
+			console.log(data);
+			wx.showLoading({
+				title: '正在预定中...',
+			});
+			wx.request({
+				url: `${app.globalData.hostPre}/applications`,
+				data: data,
+				method: 'POST',
+				header: {
+					'content-type': 'application/json'
+				},
+				success(res) {
+					wx.hideLoading();
+					if (res.data.status == "success") {
+						$Toast({
+							content: '预约成功',
+							type: 'success'
+						});
+						setTimeout(function () {
+							wx.navigateBack({
+								delta: 2
+							})
+						}, 1000);
+					} else{
+            if(res.statusCode==401){
+              $Toast({
+                content: '未登录',
+                type: 'error'
+              });
+            }else{
+              $Toast({
+                content: '网络错误',
+                type: 'error'
+              });
+            }
+					}
+				},
+				fail(res){
+					wx.hideLoading();
+					$Toast({
+						content: '预约失败',
+						type: 'error'
+					});
+				}
+
+			})
+		} else {
+			$Toast({
+				content: '预约信息不完全',
+				type: 'warning'
+			});
+		}
 	},
 	onChangeMeetingRoom(e) {
 		this.setData({
@@ -97,6 +173,11 @@ Page({
 	getUse(e) {
 		this.setData({
 			use: e.detail.value
+		})
+	},
+	getTime(e) {
+		this.setData({
+			time: e.detail.value
 		})
 	}
 })

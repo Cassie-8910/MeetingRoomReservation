@@ -1,6 +1,7 @@
 {
     "usingComponents": {
         "i-alert": "../dist/alert/index",
-        "i-icon": "/components/dist/icon/index"
+        "i-icon": "/components/dist/icon/index",
+        "i-toast": "../dist/toast/index"
     }
 }

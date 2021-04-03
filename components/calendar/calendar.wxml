@@ -2,7 +2,7 @@
   <!-- 顶部会议室选择 -->
   <view class="section">
     <picker mode="selector" range="{{rooms}}" range-key="name" bindchange="handleRoomChange" value="name">
-      <view class="picker">
+      <view class="picker" >
         {{roomCurrent}}
         <i-icon type="unfold" size="20" />
       </view>
@@ -45,4 +45,7 @@
       注: <span class="redFont">红色</span>代表已预约满,<span class="yellowFont">黄色</span>代表未预约满
     </i-alert>
   </view>
+
+  <i-toast id="toast" />
+
 </view>

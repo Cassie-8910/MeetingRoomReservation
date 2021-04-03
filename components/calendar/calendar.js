@@ -1,11 +1,13 @@
+const app = getApp()
+const { $Toast } = require('../dist/base/index');
 Component({
   attached: function () {
     // 在组件实例进入页面节点树时执行
-    console.log("=====" + this.data.newDay);
     this.dateData()
     this.checked()
     this.unChecked()
-    this.getToday()
+    this.getToday();
+    this.getDayStatus();
   },
   /**
    * 组件的属性列表
@@ -16,11 +18,11 @@ Component({
       value: '',
       observer: function (newVal, oldVal, changedPath) {
         // 将日期传入页面
-        this.dateData()
-        // 初始化有选中样式
+        // this.dateData()
+        // // 初始化有选中样式
         this.checked()
-        // 给当日日期添加特殊样式
-        this.getToday()
+        // // 给当日日期添加特殊样式
+        // this.getToday()
       }
     },
     unDay: {
@@ -48,6 +50,7 @@ Component({
     days: [], //日期数据
     verticalCurrent: 2,
     roomCurrent: "403网络直播间",
+    roomCurrentId: 1,
     rooms: [{
       id: 1,
       name: "403网络直播间"
@@ -61,6 +64,46 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    getDayStatus: function() {
+      
+      let that = this;
+      let newDay = this.data.newDay
+      let unDay = this.data.unDay
+      wx.request({
+        url: `${app.globalData.hostPre}/rooms/${that.data.roomCurrentId}/status?date=${that.data.year}-${that.data.month}`,
+        method: 'GET',
+        success(res) {
+          console.log(res)
+          if(res.data.status == "success"){
+            newDay = res.data.data.full
+            unDay = res.data.data.notFull  
+            that.setData({
+              newDay: newDay,
+              unDay: unDay
+            })
+          }else{
+            console.log(res);
+            if(res.statusCode==401){
+              // $Toast({
+              //   content: '未登录',
+              //   type: 'error'
+              // });
+            }else{
+              $Toast({
+                content: '网络错误',
+                type: 'error'
+              });
+            }
+          }
+        },
+        fail(res){
+          $Toast({
+            content: '网络错误',
+            type: 'error'
+          });
+        }
+      })  
+    },
     // 获取时间
     dateData: function () {
       let time = new Date();
@@ -176,6 +219,7 @@ Component({
     },
     //点击增加月份
     addMonth: function () {
+      console.log("===进入增加月份");
       let year = this.data.year;
       let month = this.data.month;
       month++
@@ -187,13 +231,12 @@ Component({
         year: year,
         month: month
       })
-
-      this.updateDays(year, month)
-      this.checked()
-      this.unChecked()
-      this.getToday()
+      this.updateDays(year, month);
+      this.checked();
+      this.unChecked();
+      this.getToday();
+      this.getDayStatus();
     },
-
     // 获取今日日期，使当天日期有单独样式
     getToday: function () {
       let time = new Date();
@@ -212,17 +255,20 @@ Component({
         today: today
       })
     },
+    // 点击某天跳转预约详情页面
     toDay: function (item) {
       var day = item.currentTarget.dataset.index;
       wx.navigateTo({
-        url: '../detail/detail?day=' + day + "&year=" + this.data.year + "&month=" + this.data.month,
+        url: '../detail/detail?day=' + day + "&year=" + this.data.year + "&month=" + this.data.month+"&roomCurrentId="+this.data.roomCurrentId,
       })
     },
     // 切换会议室
     handleRoomChange({ detail = {} }) {
       this.setData({
-        roomCurrent: this.data.rooms[detail.value].name
+        roomCurrent: this.data.rooms[detail.value].name,
+        roomCurrentId: this.data.rooms[detail.value].id
       });
+      this.getDayStatus();
     }
   },
 })

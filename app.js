@@ -11,15 +11,22 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if(res.code){
-          console.log(res.code);
           wx.request({
-            url: this.globalData.hostPre+'api/v1/user/login',
+            url: this.globalData.hostPre+'/user/login',
             method: "post",
             data: {
-              code: res.code
+              "code": res.code
             },
             success: res => {
-
+              if(res.data.status=="success"){
+                this.globalData.token = res.data.data;
+              }else{
+                console.log("登录失败")
+              }
+              console.log("App token:"+this.globalData.token)
+            },
+            fail (res){
+              console.log("登录失败")
             }
           })
         }else {
@@ -30,6 +37,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    hostPre: "http://10.111.62.80:8000/"
+    hostPre: "http://10.111.137.112:8000/api/v1",
+    token:""
   }
 })

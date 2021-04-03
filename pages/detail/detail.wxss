@@ -26,3 +26,7 @@
 .status {
     font-size: 30rpx !important;
 }
+
+.timeline {
+    font-size: 30rpx
+}
