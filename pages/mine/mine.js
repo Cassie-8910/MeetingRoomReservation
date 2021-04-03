@@ -1,3 +1,5 @@
+// const { $Message } = require('../..components/dist/base/index');
+
 Page({
   data: {
     motto: 'Hello World',
@@ -5,8 +7,33 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+    current: 2,
+    verticalCurrent: 2,
+    visible2: false,
+    //小程序没有refs，所以只能用动态布尔值控制关闭
+    toggle: false,
+    toggle2: false,
+    // 滑动后显示该模块
+    actions: [
+      {
+        name: '取消预约',
+        color: '#fff',
+        fontsize: '20',
+        width: 100,
+        background: '#ed3f14'
+      }
+    ]
   },
+
+  // 取消预约的回调
+  handlerCloseButton() {
+    console.log("========");
+    this.setData({
+      toggle2: this.data.toggle2 ? false : true
+    });
+  },
+
   //事件处理函数
   bindViewTap() {
     wx.navigateTo({

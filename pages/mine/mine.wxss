@@ -39,7 +39,7 @@
 }
 
 .item-content {
-  float: right;
+  /* float: right; */
   display: inline-block;
   font-size: 32rpx;
   margin-right: 20rpx;
@@ -53,38 +53,16 @@
   margin-left: 16rpx;
 }
 
-
 .register-wrap {
   text-align: center;
 }
 
-.jumper {
-  display: inline-block;
-  color: #fff;
-  background: #48c23d;
-  height: 80rpx;
-  line-height: 80rpx;
-  margin: 100rpx 0 0;
-  width: 92%;
-}
-
-.register {
-  display: inline-block;
-  color: #fff;
-  background: #FF4949;
-  height: 80rpx;
-  line-height: 80rpx;
-  margin: 20rpx 0 0;
-  width: 92%;
-}
-
-.user-head {
+/*历史记录 */
+.history_record{
   position: relative;
-  display: inline-block;
-  left: 50%;
-  margin-left: -60rpx;
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50%;
-  background: #F1F1F1;
+}
+.time,.room,.status{
+  height: 100rpx;
+  font-size: 40rpx;
+  line-height: 100rpx;
 }
