@@ -2,6 +2,9 @@
   "navigationBarTitleText": "预约",
   "usingComponents": {
     "i-toast": "/components/dist/toast/index",
-    "i-button": "/components/dist/button/index"
+    "i-button": "/components/dist/button/index",
+    "mp-form": "weui-miniprogram/form/form",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell"
   }
 }

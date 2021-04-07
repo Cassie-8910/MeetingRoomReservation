@@ -1,3 +1,7 @@
 <view class="container">
-  <calendar bind:getDayStatus="getDayStatus"  id="calendar" new-day="{{newDay}}" un-day="{{unDay}}"></calendar>
+  <calendar bind:getDayStatus="getDayStatus"  id="calendar" disabled-day="{{disabledDay}}" new-day="{{newDay}}" un-day="{{unDay}}"></calendar>
+
+  <view bindtap="downloadFile" class="download">
+    预约表下载打印纸质版
+  </view>
 </view>

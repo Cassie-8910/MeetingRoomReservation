@@ -104,12 +104,13 @@
 .calendar_day_li.full {
   background: red;
   color: #fff;
-  border: 2rpx solid #7ea0e2;
 }
 .calendar_day_li.under {
   background: orange;
   color: #fff;
-  border: 2rpx solid #7ea0e2;
+}
+.calendar_day_li.disabled {
+  color: #ddd;
 }
 
 .calendar_day_li.none {

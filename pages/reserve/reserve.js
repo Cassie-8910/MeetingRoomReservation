@@ -1,6 +1,8 @@
 var app = getApp();
 var util = require('../../utils/util.js');
-const { $Toast } = require('../../components/dist/base/index');
+const {
+	$Toast
+} = require('../../components/dist/base/index');
 Page({
 	data: {
 		meetingRoomArr: ['403网络直播间', '404共享办公室'],
@@ -16,7 +18,47 @@ Page({
 		phoneNum: "", //电话
 		mailbox: "", //邮箱
 		use: "", // 申请用途
-		time: "" //申请时间
+		time: "", //申请时间
+		rules: [{
+			name: 'name',
+			rules: {
+				required: true,
+				message: '请输入姓名'
+			},
+		}, {
+			name: 'className',
+			rules: {
+				required: true,
+				message: '请输入班级'
+			},
+		}, {
+			name: 'number',
+			rules: {
+				required: true,
+				message: '请输入工号或学号'
+			},
+		}, {
+			name: 'mailbox',
+			rules: [{
+				required: true,
+				message: 'mobile必填'
+			}, {
+				mobile: true,
+				message: 'mobile格式不对'
+			}],
+		}, {
+			name: 'phoneNum',
+			rules: {
+				required: true,
+				message: '请输入电话号码'
+			},
+		}, {
+			name: 'use',
+			rules: {
+				required: true,
+				message: '请输入用途'
+			},
+		}]
 	},
 	onLoad: function (options) {
 		this.setData({
@@ -27,9 +69,31 @@ Page({
 		})
 	},
 
+	//表单验证规则
+	initValidate() {
+		const rules = {
+
+		}
+	},
+
 	//预定按钮事件
 	onReserve() {
-		if (this.data.name && this.data.className && this.data.number && this.data.mailbox && this.data.phoneNum && this.data.use) {
+		if (!(this.data.name && this.data.className && this.data.number && this.data.use)) {
+			$Toast({
+				content: '预约信息不完全',
+				type: 'warning'
+			});
+		} else if (!(/^1[0-9]{10}$/.test(this.data.phoneNum))) {
+			$Toast({
+				content: '请输入正确的电话',
+				type: 'warning'
+			});
+		} else if (!(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(this.data.mailbox))) {
+			$Toast({
+				content: '请输入正确的邮箱',
+				type: 'warning'
+			});
+		} else {
 			console.log(this.data.meetingRoomArr[this.data.meetingRoomIndex])
 
 			function getCurrentRoomId(currentRoom) {
@@ -48,7 +112,6 @@ Page({
 			console.log('startStamp:' + startStamp + 'endStamp:' + endStamp)
 
 			let data = {
-				"userId": 1,
 				"roomId": roomId,
 				"applicant": this.data.name,
 				"college": this.data.academyArr[this.data.academyIndex],
@@ -70,7 +133,8 @@ Page({
 				data: data,
 				method: 'POST',
 				header: {
-					'content-type': 'application/json'
+					'content-type': 'application/json',
+					'Authorization': app.globalData.token
 				},
 				success(res) {
 					wx.hideLoading();
@@ -84,21 +148,21 @@ Page({
 								delta: 2
 							})
 						}, 1000);
-					} else{
-            if(res.statusCode==401){
-              $Toast({
-                content: '未登录',
-                type: 'error'
-              });
-            }else{
-              $Toast({
-                content: '网络错误',
-                type: 'error'
-              });
-            }
+					} else {
+						if (res.statusCode == 401) {
+							$Toast({
+								content: '未登录',
+								type: 'error'
+							});
+						} else {
+							$Toast({
+								content: '网络错误',
+								type: 'error'
+							});
+						}
 					}
 				},
-				fail(res){
+				fail(res) {
 					wx.hideLoading();
 					$Toast({
 						content: '预约失败',
@@ -107,12 +171,8 @@ Page({
 				}
 
 			})
-		} else {
-			$Toast({
-				content: '预约信息不完全',
-				type: 'warning'
-			});
 		}
+
 	},
 	onChangeMeetingRoom(e) {
 		this.setData({

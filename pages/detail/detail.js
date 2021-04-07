@@ -37,6 +37,9 @@ Page({
     wx.request({
       url: `${app.globalData.hostPre}/rooms/${currentRoomId}?dateStr=` + dateStr,
       method: 'GET',
+      header: {
+        'Authorization': app.globalData.token
+      },
       success(res) {
         console.log(res.data)
         if (res.data.status == "success") {

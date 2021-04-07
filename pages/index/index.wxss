@@ -2,3 +2,11 @@
   padding: 0;
   font-size: 20px;
 }
+.download {
+  position: absolute;
+  color: #74b9ff;
+  font-size: 34rpx;
+  font-weight: 600;
+  bottom: 30rpx;
+  text-decoration: underline;
+}

@@ -3,11 +3,46 @@ const { $Toast } = require('../dist/base/index');
 Component({
   attached: function () {
     // 在组件实例进入页面节点树时执行
-    this.dateData()
-    this.checked()
-    this.unChecked()
-    this.getToday();
-    this.getDayStatus();
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if(res.code){
+          wx.request({
+            url: app.globalData.hostPre+'/user/login',
+            method: "POST",
+            data: {
+              "code": res.code
+            },
+            success: res => {
+              if(res.data.status=="success"){
+                app.globalData.token = 'Bearer ' + res.data.data;
+              }else{
+                $Toast({
+                  content: '登录失败',
+                  type: 'error'
+                });
+              }
+              console.log("App token:"+app.globalData.token)
+              this.dateData()
+              this.getToday()
+              this.getDayStatus()
+            },
+            fail (res){
+              $Toast({
+                content: '登录失败',
+                type: 'error'
+              });
+            }
+          })
+        }else {
+          // console.log('登录失败！' + res.errMsg)
+          $Toast({
+            content: '登录失败',
+            type: 'error'
+          });
+        }
+      }
+    })
   },
   /**
    * 组件的属性列表
@@ -37,6 +72,13 @@ Component({
         // this.getToday()
       }
     },
+    disabledDay: {
+      type: Array,
+      value: '',
+      observer: function (newVal, oldVal, changedPath) {
+        this.disabled()
+      }
+    }
   },
 
   /**
@@ -64,25 +106,93 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    getDayStatus: function() {
+    getDisabledDay() {
       
+    },
+    getDayStatus: function() {
       let that = this;
       let newDay = this.data.newDay
       let unDay = this.data.unDay
+      let disabledDay = this.data.disabledDay
       wx.request({
-        url: `${app.globalData.hostPre}/rooms/${that.data.roomCurrentId}/status?date=${that.data.year}-${that.data.month}`,
+        url: `${app.globalData.hostPre}/rooms/${that.data.roomCurrentId}/statuses?role=user&date=${that.data.year}-${that.data.month}`,
         method: 'GET',
+        header: {
+          'Authorization': app.globalData.token
+        },
         success(res) {
-          console.log(res)
+          // console.log("日历页面预约满否响应",res)
           if(res.data.status == "success"){
             newDay = res.data.data.full
             unDay = res.data.data.notFull  
             that.setData({
               newDay: newDay,
-              unDay: unDay
+              unDay: unDay,
             })
           }else{
-            console.log(res);
+            // console.log("获取日历预约满否失败响应",res);
+            if(res.statusCode==401){
+              $Toast({
+                content: '未登录',
+                type: 'error'
+              });
+            } else{
+              $Toast({
+                content: '网络错误',
+                type: 'error'
+              });
+            }
+          }
+        },
+        fail(res){
+          $Toast({
+            content: '网络错误',
+            type: 'error'
+          });
+        }
+      })  
+
+      wx.request({
+        url: `${app.globalData.hostPre}/rooms?role=user`,
+        method: 'GET',
+        header: {
+          'Authorization': app.globalData.token
+        },
+        success(res) {
+          // console.log("禁用响应",res)
+          if(res.data.status == "success"){
+            disabledDay = []
+            // console.log("进入响应成功")
+            let notAvailableDay = []
+            let sumDay = (new Date(that.data.year, that.data.month, 0).getDate()) // 获取当前月共有多少天
+            let firstDay = (new Date(that.data.year, that.data.month - 1, 1).getDay()) //当前月1号是星期几
+            // console.log(sumDay, firstDay)
+            let firstDate = new Array(7) // 每个月周几第一次出现的日期
+            let index = firstDay-1
+            for(let i=1; i<=firstDate.length;) {
+              firstDate[index%7] = i++
+              index++
+            }
+            // console.log("firstDate:",firstDate)
+            res.data.data.forEach((item,index)=> {
+              if(!item.isAvailable){
+                notAvailableDay.push(index)
+              }
+            })
+            for(let i=0; i<notAvailableDay.length; i++) {
+              for(let j=firstDate[notAvailableDay[i]]; j<=sumDay; j+=7) {
+                let day = that.data.year + '-' + that.data.month + '-' + j
+                disabledDay.push(day)
+              }
+            }
+            // console.log("disabledDay:", disabledDay)     
+            // console.log('notAvailableDay', notAvailableDay)
+            that.setData({
+              disabledDay: disabledDay
+            })
+            that.disabled()
+          } else{
+            // console.log(res);
             if(res.statusCode==401){
               // $Toast({
               //   content: '未登录',
@@ -102,8 +212,9 @@ Component({
             type: 'error'
           });
         }
-      })  
+      })
     },
+
     // 获取时间
     dateData: function () {
       let time = new Date();
@@ -173,7 +284,7 @@ Component({
       })
     },
 
-    // 初始化没有选中效果
+    // 初始化没有选中满效果
     unChecked: function () {
       let year = this.data.year;
       let month = this.data.month;
@@ -185,6 +296,23 @@ Component({
       }
       // console.log(days);
       this.setData({
+        days: days
+      })
+    },
+
+
+    // 初始化禁用的周次的天
+    disabled: function() {
+      let year = this.data.year;
+      let month = this.data.month;
+      let disabledDay = this.data.disabledDay;
+      let days = this.data.days;
+      for (var i = 1; i < days.length; i++) {
+        let a = year + '-' + month + '-' + days[i]['index']
+        days[i]['disabled'] = this.inArray(disabledDay, a)
+      }
+      //  console.log(days);
+       this.setData({
         days: days
       })
     },
@@ -215,7 +343,9 @@ Component({
       this.updateDays(year, month)
       this.checked()
       this.unChecked()
+      this.disabled()
       this.getToday()
+      this.getDayStatus()
     },
     //点击增加月份
     addMonth: function () {
@@ -234,6 +364,7 @@ Component({
       this.updateDays(year, month);
       this.checked();
       this.unChecked();
+      this.disabled()
       this.getToday();
       this.getDayStatus();
     },
@@ -258,9 +389,13 @@ Component({
     // 点击某天跳转预约详情页面
     toDay: function (item) {
       var day = item.currentTarget.dataset.index;
-      wx.navigateTo({
-        url: '../detail/detail?day=' + day + "&year=" + this.data.year + "&month=" + this.data.month+"&roomCurrentId="+this.data.roomCurrentId,
-      })
+      let disabledDay = this.data.disabledDay
+      let date = this.data.year + '-' + this.data.month + '-' + day
+      if(disabledDay.indexOf(date) == -1){
+        wx.navigateTo({
+          url: '../detail/detail?day=' + day + "&year=" + this.data.year + "&month=" + this.data.month+"&roomCurrentId="+this.data.roomCurrentId,
+        })
+      }
     },
     // 切换会议室
     handleRoomChange({ detail = {} }) {
