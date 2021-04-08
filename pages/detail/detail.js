@@ -35,7 +35,7 @@ Page({
     let app = getApp()
     // console.log('app:', app.globalData)
     wx.request({
-      url: `${app.globalData.hostPre}/rooms/${currentRoomId}?dateStr=` + dateStr,
+      url: `${app.globalData.hostPre}/rooms/${currentRoomId}?dateStr=` + dateStr + `&role=user`,
       method: 'GET',
       header: {
         'Authorization': app.globalData.token

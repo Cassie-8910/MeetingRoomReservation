@@ -57,10 +57,13 @@ Page({
   },
 
   downloadFile: function () {
-    console.log("进入下载")
+    console.log("进入下载"+`${app.globalData.hostPre}/file/download/申请表.docx`)
     var _this = this;
     wx.downloadFile({
-      // url: 'http://10.111.62.80:8002/api/v1/filedownload/text',
+      url: `${app.globalData.hostPre}/file/download/申请表.docx`+`?role=user`,
+      header: {
+        'Authorization': app.globalData.token
+      },
       success: function (res) {        
         if (res.statusCode === 200) {
           console.log(res.tempFilePath)
