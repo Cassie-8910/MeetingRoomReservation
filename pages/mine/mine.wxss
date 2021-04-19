@@ -11,6 +11,10 @@
   border-radius: 50%;
 }
 
+.userinfo-nickname{
+  text-align: center;
+}
+
 .page {
   height: 100%;
   background: #eee;
@@ -66,3 +70,4 @@
   font-size: 40rpx;
   line-height: 100rpx;
 }
+

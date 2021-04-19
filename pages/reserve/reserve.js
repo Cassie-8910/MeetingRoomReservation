@@ -129,7 +129,7 @@ Page({
 				title: '正在预定中...',
 			});
 			wx.request({
-				url: `${app.globalData.hostPre}/applications`,
+				url: `${app.globalData.hostPre}/applications?role=user`,
 				data: data,
 				method: 'POST',
 				header: {
